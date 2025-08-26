@@ -1,4 +1,5 @@
-import React, { act, useState } from 'react';
+import React, { useState } from 'react';
+import Button from './Button';
 
 type ListItemProps = {
   icon: string;
@@ -15,14 +16,11 @@ export default function ListItem({ icon, children }: ListItemProps) {
   };
 
   return (
-    <li className="mt-5 border-2">
-      <button
-        className="pointer mx-auto flex flex-col justify-center gap-2 outline-none"
-        onClick={handleClick}
-      >
+    <li className="mt-10">
+      <Button className="h-full w-full" onClick={handleClick}>
         <span className="material-symbols-outlined">{icon}</span>
-        {active ? children : ''}
-      </button>
+        {children}
+      </Button>
     </li>
   );
 }
