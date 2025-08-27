@@ -1,13 +1,14 @@
 import Header from './components/Header/Header.tsx';
+import Assignment from './components/Assignment.tsx';
 
 export default function App() {
   return (
     <>
       {/* Smaller device blocker */}
       <div className="fixed inset-0 h-dvh w-dvw bg-amber-300 lg:hidden"></div>
-      <div className="mx-auto flex max-w-[1500px]">
+      <div className="mx-auto flex">
         <Header />
-        <main className="h-dvh"></main>
+        <Assignment />
       </div>
     </>
   );

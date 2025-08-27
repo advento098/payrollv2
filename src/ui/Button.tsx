@@ -15,9 +15,9 @@ export default function Button({
 }: ButtonType) {
   const variants: Record<string, string> = {
     navButton:
-      'pointer hover:bg-secondary font-body font-heading text-2xl flex items-center gap-3 rounded-2xl px-10 py-5 shadow-sm shadow-black/70 outline-none hover:cursor-pointer hover:text-white',
+      'pointer hover:bg-secondary font-body font-heading text-2xl flex items-center gap-3 rounded-sm px-10 py-5 shadow-sm shadow-black/70 outline-none hover:cursor-pointer hover:text-white',
     logoutButton:
-      'mt-auto w-50 p-2 font-heading place-self-center text-center pointer hover:bg-secondary rounded-2xl shadow-sm shadow-black/70 outline-none hover:cursor-pointer hover:text-white',
+      'mt-auto w-50 p-2 font-heading place-self-center text-center pointer hover:bg-secondary rounded-sm shadow-sm shadow-black/70 outline-none hover:cursor-pointer hover:text-white',
   };
 
   return (
