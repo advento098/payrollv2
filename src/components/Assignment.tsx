@@ -25,28 +25,34 @@ export default function Assignment() {
         <div className="border-b-2">
           <h2 className="text-center">August</h2>
           <table>
-            <tr>
-              <td className={variants.tableHeader}>Date type</td>
-              <td className={variants.tableHeader}>Date</td>
-              {test ? (
-                <td className={clsx(variants.tableData, 'border-r-2')}>Day</td>
-              ) : (
-                <td className={clsx(variants.nullDataHeader, 'border-r-2')}>
-                  <div className="relative flex justify-center">
-                    <button
-                      className="flex cursor-pointer"
-                      onClick={handleSelectorClick}
-                    >
-                      <span className="material-symbols-outlined !text-[25px]">
-                        arrow_drop_down_circle
-                      </span>
-                    </button>
+            <thead>
+              <tr>
+                <td className={variants.tableHeader}>Date type</td>
+                <td className={variants.tableHeader}>Date</td>
+                {test ? (
+                  <td className={clsx(variants.tableData, 'border-r-2')}>
+                    Day
+                  </td>
+                ) : (
+                  <td className={clsx(variants.nullDataHeader, 'border-r-2')}>
+                    <div className="relative flex justify-center">
+                      <button
+                        className="flex cursor-pointer"
+                        onClick={handleSelectorClick}
+                      >
+                        <span className="material-symbols-outlined !text-[25px]">
+                          arrow_drop_down_circle
+                        </span>
+                      </button>
 
-                    {selector && <div className="absolute">Some Posts</div>}
-                  </div>
-                </td>
-              )}
-            </tr>
+                      {selector && <div className="absolute">Some Posts</div>}
+                    </div>
+                  </td>
+                )}
+              </tr>
+            </thead>
+            <tbody></tbody>
+            <tfoot></tfoot>
           </table>
         </div>
       </div>
