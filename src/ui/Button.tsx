@@ -1,10 +1,12 @@
 import type { MouseEventHandler, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 type ButtonType = {
   className?: string;
   onClick: MouseEventHandler;
   children: ReactNode;
   variant?: 'navButton' | 'logoutButton';
+  href?: string;
 };
 
 export default function Button({
@@ -12,6 +14,7 @@ export default function Button({
   onClick,
   children,
   variant = 'navButton',
+  href = '/',
 }: ButtonType) {
   const variants: Record<string, string> = {
     navButton:
@@ -21,8 +24,12 @@ export default function Button({
   };
 
   return (
-    <button className={variants[variant] + ' ' + className} onClick={onClick}>
+    <Link
+      to={href}
+      className={variants[variant] + ' ' + className}
+      onClick={onClick}
+    >
       {children}
-    </button>
+    </Link>
   );
 }

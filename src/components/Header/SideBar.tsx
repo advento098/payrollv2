@@ -11,9 +11,15 @@ export default function SideBar() {
         className="mx-auto w-[75%]"
       />
       <ul className="font-heading mt-10 list-none text-center">
-        <ListItem icon="assignment_ind">Assignment</ListItem>
-        <ListItem icon="dashboard">Dashboard</ListItem>
-        <ListItem icon="edit">Edit</ListItem>
+        <ListItem href="/dashboard" icon="dashboard">
+          Dashboard
+        </ListItem>
+        <ListItem href="/assignment" icon="assignment_ind">
+          Assignment
+        </ListItem>
+        <ListItem href="/edit" icon="edit">
+          Edit / Add
+        </ListItem>
       </ul>
       <Button variant="logoutButton" onClick={() => console.log('Clicked')}>
         Logout
