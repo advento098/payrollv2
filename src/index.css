@@ -3,8 +3,11 @@
 
 @theme {
   --color-primary: #efc009;
-  --color-secondary: #0b3d67;
+  --color-secondary: #223e6d;
+  --color-accent: #17bebb;
+  --color-background: #f3f4f6;
   --color-off-white: #f9f8f4;
+  --color-text: #111827;
 
   --font-heading: 'Exo 2', 'sans-serif';
   --font-body: 'Source Sans 3', 'sans-serif';
