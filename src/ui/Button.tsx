@@ -11,7 +11,7 @@ import {
 type ButtonType = {
   className?: string;
   children: ReactNode;
-  variant?: 'navButton' | 'logoutButton' | 'iconOnly';
+  variant?: 'navButton' | 'logoutButton' | 'generateUserPDF';
   href?: string;
   tooltip?: string;
   onClick?: MouseEventHandler;
@@ -32,7 +32,9 @@ export default function Button({
     logoutButton:
       'mt-auto w-50 p-2 font-heading place-self-center text-center pointer rounded-sm shadow-sm shadow-black/70 outline-none hover:cursor-pointer hover:bg-secondary hover:!text-white text-secondary border-secondary',
 
-    iconOnly: '',
+    generateUserPDF:
+      'mt-4 w-full px-4 py-2 font-heading text-sm text-white bg-primary rounded-md shadow-md shadow-black/40 hover:bg-secondary hover:!text-off-white transition-colors duration-300 ease-in-out cursor-pointer',
+
     iconActive: 'bg-secondary rounded-full text-white',
     navButtonActive: 'bg-primary text-white',
   };
@@ -43,14 +45,35 @@ export default function Button({
     end: true,
   });
 
-  return (
+  return variant === 'generateUserPDF' ? (
+    <PDFButton
+      className={clsx(variants[variant], className)}
+      onClick={onClick!}
+    >
+      {children}
+    </PDFButton>
+  ) : (
     <Link
       to={href}
-      className={clsx("group",variants[variant], className)}
+      className={clsx('group', variants[variant], className)}
       title={tooltip}
       onClick={onClick}
     >
       {children}
     </Link>
+  );
+}
+
+type PDFButtonType = {
+  className: string;
+  onClick: MouseEventHandler;
+  children: ReactNode;
+};
+
+export function PDFButton({ className, onClick, children }: PDFButtonType) {
+  return (
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
   );
 }

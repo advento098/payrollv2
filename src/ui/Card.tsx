@@ -1,3 +1,4 @@
+import Button from './Button';
 import imgPlaceHolder from '/person_image_placeholder.svg';
 
 type CardTypes = {
@@ -220,6 +221,7 @@ function DashboardSimpleCard({
             </tr>
           </tfoot>
         </table>
+        <Button variant="generateUserPDF">Download</Button>
       </div>
     </div>
   );

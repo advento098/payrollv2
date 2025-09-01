@@ -6,7 +6,7 @@ type ListItemProps = {
   icon: string;
   children?: React.ReactNode;
   href: string;
-  variant?: 'navButton' | 'logoutButton' | 'iconOnly';
+  variant?: 'navButton' | 'logoutButton' | 'generateUserPDF';
   tooltip?: string;
 };
 
@@ -23,10 +23,6 @@ export default function ListItem({
     dashBoardList: 'flex flex-col !text-4xl',
     sidebarList: ' h-full w-full',
   };
-
-  const isIconOnly: string =
-    variant == 'iconOnly' ? variants.dashBoardList : '';
-
   const handleClick = () => {
     if (active) {
       setActive((prev) => !prev);
@@ -34,21 +30,14 @@ export default function ListItem({
   };
 
   return (
-    <li className={variant == 'iconOnly' ? '' : 'mt-10'}>
+    <li className={'mt-10'}>
       <Button
         variant={variant}
         href={href}
-        className={
-          variant == 'iconOnly' ? variants.dashBoardList : variants.sidebarList
-        }
+        className={variants.sidebarList}
         tooltip={tooltip}
       >
-        <span
-          className={clsx(
-            'material-symbols-outlined text-secondary group-hover:text-white',
-            isIconOnly
-          )}
-        >
+        <span className="material-symbols-outlined text-secondary group-hover:text-white">
           {icon}
         </span>
         {children}
