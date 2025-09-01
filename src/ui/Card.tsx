@@ -49,7 +49,7 @@ function DashboardSimpleCard({
   secondHalf,
 }: CardTypes) {
   return (
-    <div className="grid grid-cols-[1fr_1fr_auto_auto] gap-6 border-2 border-gray-300 bg-[#f3f4f6] p-6 text-[#111827]">
+    <div className="bg-background grid grid-cols-[1fr_1fr_auto_auto] gap-6 border-2 border-gray-300 p-6 text-[#111827]">
       {/* Profile */}
       <div className="rounded-xl border-2 border-gray-300 bg-white p-4 text-center shadow-md">
         <img
@@ -200,7 +200,7 @@ function DashboardSimpleCard({
               <td>Tax:</td>
               <td className="text-right">#</td>
             </tr>
-            <tr>
+            <tr className="border-t border-gray-400">
               <td>Deductions:</td>
               <td className="text-right">#</td>
             </tr>

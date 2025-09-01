@@ -43,7 +43,12 @@ export default function ListItem({
         }
         tooltip={tooltip}
       >
-        <span className={clsx('material-symbols-outlined', isIconOnly)}>
+        <span
+          className={clsx(
+            'material-symbols-outlined text-secondary group-hover:text-white',
+            isIconOnly
+          )}
+        >
           {icon}
         </span>
         {children}

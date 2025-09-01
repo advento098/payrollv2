@@ -4,7 +4,7 @@ import Button from '../../ui/Button';
 
 export default function SideBar() {
   return (
-    <nav className="flex h-full max-w-2xs flex-col">
+    <nav className="text-text flex h-full max-w-2xs flex-col">
       <img
         src={centerTextLogo}
         alt="bongkim_center_text"

@@ -3,9 +3,14 @@ import Card from '../../../ui/Card';
 
 export default function Dashboard() {
   return (
-    <main className="w-[80%]">
+    <main className="h-dvh w-[80%] p-10 pb-0">
       {/* Cards holder */}
-      <div className="main-container flex h-full w-full flex-col items-center overflow-y-hidden border-2 border-cyan-500 p-10">
+      <div className="main-container flex h-full flex-col items-center gap-5 overflow-y-scroll border-2">
+        <div className="sticky top-0 z-10">---search bar here---</div>
+        <Card type="simple"></Card>
+        <Card type="simple"></Card>
+        <Card type="simple"></Card>
+        <Card type="simple"></Card>
         <Card type="simple"></Card>
       </div>
     </main>
