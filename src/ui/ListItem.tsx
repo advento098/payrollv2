@@ -18,11 +18,7 @@ export default function ListItem({
   tooltip,
 }: ListItemProps) {
   const [active, setActive] = useState(false);
-
-  const variants: Record<string, string> = {
-    dashBoardList: 'flex flex-col !text-4xl',
-    sidebarList: ' h-full w-full',
-  };
+  const sidebarList = ' h-full w-full';
   const handleClick = () => {
     if (active) {
       setActive((prev) => !prev);
@@ -34,7 +30,7 @@ export default function ListItem({
       <Button
         variant={variant}
         href={href}
-        className={variants.sidebarList}
+        className={sidebarList}
         tooltip={tooltip}
       >
         <span className="material-symbols-outlined text-secondary group-hover:text-white">

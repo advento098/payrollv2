@@ -1,19 +1,19 @@
 // import { Routes, Route } from 'react-router-dom';
 import Card from '../../../ui/Card';
+import SearchBar from '../../../ui/SearchBar';
 
 export default function Dashboard() {
   return (
     <main className="flex h-dvh w-[80%] flex-col overflow-y-scroll p-10 pb-0">
       {/* Cards holder */}
-      <div className="sticky top-0 z-10 mx-auto mb-10">
-        ---search bar here---
-      </div>
-      <div className="main-container flex flex-col items-center gap-5">
-        <Card type="simple"></Card>
-        <Card type="simple"></Card>
-        <Card type="simple"></Card>
-        <Card type="simple"></Card>
-        <Card type="simple"></Card>
+      <SearchBar />
+
+      <div className="main-container flex flex-col items-center gap-5 pb-10">
+        <Card id={0} type="simple"></Card>
+        <Card id={1} type="simple"></Card>
+        <Card id={2} type="simple"></Card>
+        <Card id={3} type="simple"></Card>
+        <Card id={4} type="simple"></Card>
       </div>
     </main>
   );

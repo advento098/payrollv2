@@ -3,6 +3,8 @@ import imgPlaceHolder from '/person_image_placeholder.svg';
 
 type CardTypes = {
   type?: 'simple';
+  // User Identifier
+  id: number;
   //   Profile section
   img?: string;
   imgAlt?: string;
@@ -15,6 +17,7 @@ type CardTypes = {
 };
 
 export default function Card({
+  id,
   type = 'simple',
   img = imgPlaceHolder,
   imgAlt = 'placeholder',
@@ -28,6 +31,7 @@ export default function Card({
     default:
       return (
         <DashboardSimpleCard
+          id={id}
           img={img}
           imgAlt={imgAlt}
           name={name}
@@ -41,6 +45,7 @@ export default function Card({
 }
 
 function DashboardSimpleCard({
+  id,
   img,
   imgAlt,
   name,
@@ -221,7 +226,7 @@ function DashboardSimpleCard({
             </tr>
           </tfoot>
         </table>
-        <Button variant="generateUserPDF">Download</Button>
+        <Button variant="generateUserPDF" id={id} />
       </div>
     </div>
   );

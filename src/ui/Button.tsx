@@ -1,4 +1,4 @@
-import type { MouseEventHandler, ReactNode } from 'react';
+import type { MouseEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import {
   Link,
@@ -10,15 +10,17 @@ import {
 
 type ButtonType = {
   className?: string;
-  children: ReactNode;
+  children?: ReactNode;
   variant?: 'navButton' | 'logoutButton' | 'generateUserPDF';
   href?: string;
   tooltip?: string;
-  onClick?: MouseEventHandler;
+  onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
+  id?: number;
 };
 
 export default function Button({
   className = '',
+  id,
   onClick,
   children,
   variant = 'navButton',
@@ -45,19 +47,21 @@ export default function Button({
     end: true,
   });
 
+  function handlePDFDownload(event: MouseEvent<HTMLButtonElement>) {
+    console.log(`Opening PDF #: ${event.currentTarget.id}`);
+  }
+
   return variant === 'generateUserPDF' ? (
     <PDFButton
       className={clsx(variants[variant], className)}
-      onClick={onClick!}
-    >
-      {children}
-    </PDFButton>
+      onClick={handlePDFDownload}
+      id={id!}
+    />
   ) : (
     <Link
       to={href}
       className={clsx('group', variants[variant], className)}
       title={tooltip}
-      onClick={onClick}
     >
       {children}
     </Link>
@@ -66,14 +70,14 @@ export default function Button({
 
 type PDFButtonType = {
   className: string;
-  onClick: MouseEventHandler;
-  children: ReactNode;
+  id: number;
+  onClick: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-export function PDFButton({ className, onClick, children }: PDFButtonType) {
+export function PDFButton({ id, className, onClick }: PDFButtonType) {
   return (
-    <button className={className} onClick={onClick}>
-      {children}
+    <button id={id?.toString()} className={className} onClick={onClick}>
+      Download PDF
     </button>
   );
 }
