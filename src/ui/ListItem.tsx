@@ -32,10 +32,8 @@ export default function ListItem({
         href={href}
         className={sidebarList}
         tooltip={tooltip}
+        icon={icon}
       >
-        <span className="material-symbols-outlined text-secondary group-hover:text-white">
-          {icon}
-        </span>
         {children}
       </Button>
     </li>

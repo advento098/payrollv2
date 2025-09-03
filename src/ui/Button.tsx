@@ -1,7 +1,7 @@
 import type { MouseEvent, ReactNode } from 'react';
 import clsx from 'clsx';
 import {
-  Link,
+  NavLink,
   useResolvedPath,
   useMatch,
   type Path,
@@ -16,6 +16,7 @@ type ButtonType = {
   tooltip?: string;
   onClick?: (event: MouseEvent<HTMLButtonElement>) => void;
   id?: number;
+  icon?: string;
 };
 
 export default function Button({
@@ -26,6 +27,7 @@ export default function Button({
   variant = 'navButton',
   href = '/',
   tooltip,
+  icon,
 }: ButtonType) {
   const variants: Record<string, string> = {
     navButton:
@@ -58,13 +60,30 @@ export default function Button({
       id={id!}
     />
   ) : (
-    <Link
+    <NavLink
       to={href}
-      className={clsx('group', variants[variant], className)}
+      className={({ isActive }) =>
+        isActive
+          ? clsx(
+              'bg-secondary border-off-white !text-white',
+              variants[variant],
+              className
+            )
+          : clsx('group', variants[variant], className)
+      }
       title={tooltip}
     >
+      <span
+        className={clsx(
+          'material-symbols-outlined group-hover:text-off-white',
+          ({ isActive }: { isActive: boolean }) =>
+            isActive ? 'text-off-white' : 'text-secondary'
+        )}
+      >
+        {icon}
+      </span>
       {children}
-    </Link>
+    </NavLink>
   );
 }
 
