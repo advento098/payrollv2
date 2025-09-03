@@ -7,7 +7,7 @@ import './index.css';
 import App from './App.tsx';
 import Dashboard from './components/pages/Dashboard/Dashboard.tsx';
 import Attendance from './components/pages/Attendance/Attendance.tsx';
-import SettingsPage from './components/pages/SettingsPages.tsx';
+import SettingsPage from './components/pages/SettingsPage.tsx';
 
 const router = createBrowserRouter([
   {

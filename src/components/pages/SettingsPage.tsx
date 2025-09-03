@@ -1,3 +1,5 @@
+import { SettingsButton } from '../../ui/Button';
+
 export default function SettingsPage() {
   return (
     <main className="bg-off-white flex min-h-screen w-[80%] justify-center px-6 py-5">
@@ -16,9 +18,7 @@ export default function SettingsPage() {
               type="date"
               className="focus:ring-primary rounded-md border px-3 py-2 focus:ring-2"
             />
-            <button className="bg-primary hover:bg-secondary rounded-md px-4 py-2 text-white transition">
-              Submit
-            </button>
+            <SettingsButton>Submit</SettingsButton>
           </form>
         </div>
 
@@ -37,9 +37,7 @@ export default function SettingsPage() {
               placeholder="Enter additional amount"
               className="focus:ring-primary rounded-md border px-3 py-2 focus:ring-2"
             />
-            <button className="bg-primary hover:bg-secondary rounded-md px-4 py-2 text-white transition">
-              Submit
-            </button>
+            <SettingsButton>Submit</SettingsButton>
           </form>
         </div>
 
@@ -54,9 +52,7 @@ export default function SettingsPage() {
               placeholder="Enter post name"
               className="focus:ring-primary rounded-md border px-3 py-2 focus:ring-2"
             />
-            <button className="bg-primary hover:bg-secondary rounded-md px-4 py-2 text-white transition">
-              Submit
-            </button>
+            <SettingsButton> Submit </SettingsButton>
           </form>
         </div>
 
@@ -102,9 +98,7 @@ export default function SettingsPage() {
               placeholder="SSS number"
               className="rounded-md border px-3 py-2"
             />
-            <button className="bg-primary hover:bg-secondary col-span-full rounded-md px-4 py-2 text-white transition">
-              Submit
-            </button>
+            <SettingsButton> Submit </SettingsButton>
           </form>
         </div>
       </div>

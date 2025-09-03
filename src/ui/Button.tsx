@@ -100,3 +100,11 @@ export function PDFButton({ id, className, onClick }: PDFButtonType) {
     </button>
   );
 }
+
+export function SettingsButton({ children }: { children: ReactNode }) {
+  return (
+    <button className="bg-primary hover:bg-secondary rounded-md px-4 py-2 text-white transition">
+      {children}
+    </button>
+  );
+}
