@@ -57,7 +57,7 @@ export default function SettingsPage() {
         </div>
 
         {/* Add Employee */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-md md:col-span-2 lg:col-span-3">
+        <div className="col-span-3 flex flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-md">
           <h2 className="text-secondary mb-4 text-lg font-semibold">
             👮 Add a Security Employee
           </h2>
@@ -98,8 +98,8 @@ export default function SettingsPage() {
               placeholder="SSS number"
               className="rounded-md border px-3 py-2"
             />
-            <SettingsButton> Submit </SettingsButton>
           </form>
+          <SettingsButton className="mx-auto mt-5 w-1/3">Submit</SettingsButton>
         </div>
       </div>
     </main>

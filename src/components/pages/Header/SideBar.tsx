@@ -21,7 +21,7 @@ export default function SideBar() {
           Edit / Add
         </ListItem>
       </ul>
-      <Button variant="logoutButton" onClick={() => console.log('Clicked')}>
+      <Button variant="logoutButton" href="login">
         Logout
       </Button>
     </nav>
