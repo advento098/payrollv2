@@ -7,7 +7,7 @@ export default function AttendanceSheet() {
   const daysInMonth = 30; // example September
 
   return (
-    <div className="bg-background text-text min-h-screen p-6">
+    <div className="bg-background text-text p-6">
       <h1 className="font-heading text-secondary mb-6 text-2xl font-bold">
         Attendance Sheet - September
       </h1>
@@ -43,7 +43,7 @@ export default function AttendanceSheet() {
           <tbody className="bg-off-white">
             {Array.from({ length: daysInMonth }, (_, i) => {
               const date = i + 1;
-              const weekday = new Date(2024, 8, date).toLocaleDateString(
+              const weekday = new Date(2024, 8, date + 1).toLocaleDateString(
                 'en-US',
                 {
                   weekday: 'long',

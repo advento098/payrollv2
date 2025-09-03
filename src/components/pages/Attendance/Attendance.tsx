@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { useState } from 'react';
+import AttendanceSheet from './AttendanceSheet';
 
 export default function Attendance() {
   const title: string = 'Angeles';
@@ -17,45 +18,8 @@ export default function Attendance() {
   } as const;
 
   return (
-    <main className="flex w-[80%] flex-col items-center border-2">
-      <h1>{title}</h1>
-      {/* For table dimension */}
-      <div className="min-w-[20%]">
-        {/* First half of the month */}
-        <div className="border-b-2">
-          <h2 className="text-center">August</h2>
-          <table>
-            <thead>
-              <tr>
-                <td className={variants.tableHeader}>Date type</td>
-                <td className={variants.tableHeader}>Date</td>
-                {test ? (
-                  <td className={clsx(variants.tableData, 'border-r-2')}>
-                    Day
-                  </td>
-                ) : (
-                  <td className={clsx(variants.nullDataHeader, 'border-r-2')}>
-                    <div className="relative flex justify-center">
-                      <button
-                        className="flex cursor-pointer"
-                        onClick={handleSelectorClick}
-                      >
-                        <span className="material-symbols-outlined !text-[25px]">
-                          arrow_drop_down_circle
-                        </span>
-                      </button>
-
-                      {selector && <div className="absolute">Some Posts</div>}
-                    </div>
-                  </td>
-                )}
-              </tr>
-            </thead>
-            <tbody></tbody>
-            <tfoot></tfoot>
-          </table>
-        </div>
-      </div>
+    <main className="flex h-dvh w-[80%] flex-col items-center overflow-y-scroll border-2">
+      <AttendanceSheet />
     </main>
   );
 }
