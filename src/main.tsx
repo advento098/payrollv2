@@ -7,7 +7,7 @@ import './index.css';
 import App from './App.tsx';
 import Dashboard from './components/pages/Dashboard/Dashboard.tsx';
 import Attendance from './components/pages/Attendance/Attendance.tsx';
-import Edit from './components/pages/Edit.tsx';
+import SettingsPage from './components/pages/SettingsPages.tsx';
 
 const router = createBrowserRouter([
   {
@@ -16,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, path: '/dashboard', Component: Dashboard },
       { path: '/assignment', Component: Attendance },
-      { path: '/edit', Component: Edit },
+      { path: '/edit', Component: SettingsPage },
     ],
     ErrorBoundary: Error,
   },
