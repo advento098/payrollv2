@@ -74,7 +74,7 @@ export default function AttendanceSheet() {
   }
 
   return (
-    <div className="bg-background text-text min-h-screen p-6">
+    <div className="text-text min-h-screen p-6">
       <h1 className="font-heading text-secondary mb-6 text-center text-2xl font-bold">
         Attendance Sheet - September
       </h1>

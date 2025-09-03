@@ -79,6 +79,7 @@ export default function SettingsPage() {
             <input
               type="date"
               placeholder="SG License Expiration"
+              title="SG License Expiration"
               className="rounded-md border px-3 py-2"
             />
             <input

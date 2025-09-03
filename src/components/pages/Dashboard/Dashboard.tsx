@@ -4,7 +4,7 @@ import SearchBar from '../../../ui/SearchBar';
 
 export default function Dashboard() {
   return (
-    <main className="flex h-dvh w-[80%] flex-col overflow-y-scroll p-10 pb-0">
+    <main className="bg-off-white flex h-dvh w-[80%] flex-col overflow-y-scroll p-10 pb-0">
       {/* Cards holder */}
       <SearchBar />
 
