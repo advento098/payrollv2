@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "kArURBOKqYM=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Pons Anthony Advento\\Documents\\Web Projects\\payrollv2\\backend\\payrollBackend\\payrollBackend.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Pons Anthony Advento\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.9\\microsoft.aspnetcore.openapi.9.0.9.nupkg.sha512",
+    "C:\\Users\\Pons Anthony Advento\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
