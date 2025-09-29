@@ -9,6 +9,8 @@ public class AppDbContext : DbContext
     {
     }
 
-    
+    public DbSet<Attendance> Attendances { get; set; }
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Salary> Salaries { get; set; }
 
 }
