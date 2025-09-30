@@ -8,6 +8,8 @@ public class Employee
     public string? Position { get; set; }
     public string? Sss { get; set; }
     public string? PagIbig { get; set; }
+    public string? PhilHealth { get; set; }
+    public required int SalaryId { get; set; }
 
     public ICollection<Attendance>? Attendances { get; set; }
     public required Salary Salary { get; set; }
