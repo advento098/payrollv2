@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace payrollBackend;
+namespace payrollBackend.Models;
 
 public class Attendance
 {
@@ -9,6 +9,8 @@ public class Attendance
     public required DutyType DutyType { get; set; }
     public AttendanceStatus AttendanceStatus { get; set; } = AttendanceStatus.Present;
     public required DateTime AttendanceDate { get; set; }
+
+    // Navigation Properties
     public required Employee Employee { get; set; }
 }
 

@@ -12,8 +12,8 @@ using payrollBackend;
 namespace payrollBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250930124634_AddedAdditionals")]
-    partial class AddedAdditionals
+    [Migration("20251008120428_UnrequiredSalaryId")]
+    partial class UnrequiredSalaryId
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,8 +91,14 @@ namespace payrollBackend.Migrations
                     b.Property<string>("PagIbig")
                         .HasColumnType("longtext");
 
+                    b.Property<string>("PhilHealth")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Position")
                         .HasColumnType("longtext");
+
+                    b.Property<int>("SalaryId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Sss")
                         .HasColumnType("longtext");
@@ -102,6 +108,9 @@ namespace payrollBackend.Migrations
                         .HasColumnType("longtext");
 
                     b.HasKey("EmployeeId");
+
+                    b.HasIndex("SalaryId")
+                        .IsUnique();
 
                     b.ToTable("Employees");
                 });
@@ -169,9 +178,6 @@ namespace payrollBackend.Migrations
                     b.Property<DateTime>("EffectiveDate")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
                     b.Property<float>("FirstHalf")
                         .HasColumnType("float");
 
@@ -185,9 +191,6 @@ namespace payrollBackend.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("SalaryId");
-
-                    b.HasIndex("EmployeeId")
-                        .IsUnique();
 
                     b.ToTable("Salaries");
                 });
@@ -214,6 +217,17 @@ namespace payrollBackend.Migrations
                     b.Navigation("Employee");
                 });
 
+            modelBuilder.Entity("payrollBackend.Employee", b =>
+                {
+                    b.HasOne("payrollBackend.Salary", "Salary")
+                        .WithOne("Employee")
+                        .HasForeignKey("payrollBackend.Employee", "SalaryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Salary");
+                });
+
             modelBuilder.Entity("payrollBackend.OtherDeduction", b =>
                 {
                     b.HasOne("payrollBackend.Salary", "Salary")
@@ -225,28 +239,17 @@ namespace payrollBackend.Migrations
                     b.Navigation("Salary");
                 });
 
-            modelBuilder.Entity("payrollBackend.Salary", b =>
-                {
-                    b.HasOne("payrollBackend.Employee", "Employee")
-                        .WithOne("Salary")
-                        .HasForeignKey("payrollBackend.Salary", "EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
-                });
-
             modelBuilder.Entity("payrollBackend.Employee", b =>
                 {
                     b.Navigation("Attendances");
-
-                    b.Navigation("Salary")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("payrollBackend.Salary", b =>
                 {
                     b.Navigation("Additionals");
+
+                    b.Navigation("Employee")
+                        .IsRequired();
 
                     b.Navigation("OtherDeductions");
                 });

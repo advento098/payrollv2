@@ -1,4 +1,4 @@
-﻿namespace payrollBackend;
+﻿namespace payrollBackend.Models;
 
 public class FixedDeduction
 {
