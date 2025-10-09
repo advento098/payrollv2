@@ -17,8 +17,9 @@ namespace payrollBackend.Controllers
         {
             var tableData = await _context.Attendances.Select(e => new
             {
-                e.AttendanceId,
-                e.AttendanceDate.Month
+                attendance = e.AttendanceId,
+                firstName = e.Employee.FirstName,
+                day = e.AttendanceDate.Day
             }).ToListAsync();
             return Ok(tableData);
         }
@@ -27,14 +28,27 @@ namespace payrollBackend.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Attendance>> GetAttendance(int id)
         {
-            var attendance = await _context.Attendances.FindAsync(id);
-
-            if (attendance == null)
+            var employeeAttendances = await _context.Employees
+                .Where(emp => emp.EmployeeId == id)
+                .Select(emp => new
+                {
+                    emp.EmployeeId,
+                    EmployeeName = emp.FirstName + " " + emp.Surname,
+                    Attendances = emp.Attendances!.Select(a => new
+                    {
+                        a.AttendanceId,
+                        a.AttendanceDate.Day,
+                        a.DutyType,
+                        a.AttendanceStatus
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+            if (employeeAttendances == null)
             {
                 return NotFound();
             }
 
-            return Ok(attendance);
+            return Ok(employeeAttendances);
         }
     }
 }
