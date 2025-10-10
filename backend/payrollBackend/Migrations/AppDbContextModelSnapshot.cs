@@ -22,7 +22,7 @@ namespace payrollBackend.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("payrollBackend.Additional", b =>
+            modelBuilder.Entity("payrollBackend.Models.Additional", b =>
                 {
                     b.Property<int>("AdditionalId")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace payrollBackend.Migrations
                     b.ToTable("Additionals");
                 });
 
-            modelBuilder.Entity("payrollBackend.Attendance", b =>
+            modelBuilder.Entity("payrollBackend.Models.Attendance", b =>
                 {
                     b.Property<int>("AttendanceId")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace payrollBackend.Migrations
                     b.ToTable("Attendances");
                 });
 
-            modelBuilder.Entity("payrollBackend.Employee", b =>
+            modelBuilder.Entity("payrollBackend.Models.Employee", b =>
                 {
                     b.Property<int>("EmployeeId")
                         .ValueGeneratedOnAdd()
@@ -83,36 +83,39 @@ namespace payrollBackend.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("PagIbig")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("PhilHealth")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Position")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(15)");
 
                     b.Property<int>("SalaryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Sss")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("varchar(20)");
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("SalaryId")
-                        .IsUnique();
+                    b.HasIndex("SalaryId");
 
                     b.ToTable("Employees");
                 });
 
-            modelBuilder.Entity("payrollBackend.FixedDeduction", b =>
+            modelBuilder.Entity("payrollBackend.Models.FixedDeduction", b =>
                 {
                     b.Property<int>("FixedDeductionId")
                         .ValueGeneratedOnAdd()
@@ -137,7 +140,7 @@ namespace payrollBackend.Migrations
                     b.ToTable("FixedDeductions");
                 });
 
-            modelBuilder.Entity("payrollBackend.OtherDeduction", b =>
+            modelBuilder.Entity("payrollBackend.Models.OtherDeduction", b =>
                 {
                     b.Property<int>("OtherDeductionId")
                         .ValueGeneratedOnAdd()
@@ -161,13 +164,16 @@ namespace payrollBackend.Migrations
                     b.ToTable("OtherDeductions");
                 });
 
-            modelBuilder.Entity("payrollBackend.Salary", b =>
+            modelBuilder.Entity("payrollBackend.Models.Salary", b =>
                 {
                     b.Property<int>("SalaryId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("SalaryId"));
+
+                    b.Property<int>("AdditionalId")
+                        .HasColumnType("int");
 
                     b.Property<float>("BasicRate")
                         .HasColumnType("float");
@@ -184,6 +190,9 @@ namespace payrollBackend.Migrations
                     b.Property<float>("NetSalary")
                         .HasColumnType("float");
 
+                    b.Property<int>("OtherDeductionId")
+                        .HasColumnType("int");
+
                     b.Property<float>("SecondHalf")
                         .HasColumnType("float");
 
@@ -192,9 +201,9 @@ namespace payrollBackend.Migrations
                     b.ToTable("Salaries");
                 });
 
-            modelBuilder.Entity("payrollBackend.Additional", b =>
+            modelBuilder.Entity("payrollBackend.Models.Additional", b =>
                 {
-                    b.HasOne("payrollBackend.Salary", "Salary")
+                    b.HasOne("payrollBackend.Models.Salary", "Salary")
                         .WithMany("Additionals")
                         .HasForeignKey("SalaryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -203,9 +212,9 @@ namespace payrollBackend.Migrations
                     b.Navigation("Salary");
                 });
 
-            modelBuilder.Entity("payrollBackend.Attendance", b =>
+            modelBuilder.Entity("payrollBackend.Models.Attendance", b =>
                 {
-                    b.HasOne("payrollBackend.Employee", "Employee")
+                    b.HasOne("payrollBackend.Models.Employee", "Employee")
                         .WithMany("Attendances")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -214,20 +223,20 @@ namespace payrollBackend.Migrations
                     b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("payrollBackend.Employee", b =>
+            modelBuilder.Entity("payrollBackend.Models.Employee", b =>
                 {
-                    b.HasOne("payrollBackend.Salary", "Salary")
-                        .WithOne("Employee")
-                        .HasForeignKey("payrollBackend.Employee", "SalaryId")
+                    b.HasOne("payrollBackend.Models.Salary", "Salary")
+                        .WithMany()
+                        .HasForeignKey("SalaryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Salary");
                 });
 
-            modelBuilder.Entity("payrollBackend.OtherDeduction", b =>
+            modelBuilder.Entity("payrollBackend.Models.OtherDeduction", b =>
                 {
-                    b.HasOne("payrollBackend.Salary", "Salary")
+                    b.HasOne("payrollBackend.Models.Salary", "Salary")
                         .WithMany("OtherDeductions")
                         .HasForeignKey("SalaryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -236,17 +245,14 @@ namespace payrollBackend.Migrations
                     b.Navigation("Salary");
                 });
 
-            modelBuilder.Entity("payrollBackend.Employee", b =>
+            modelBuilder.Entity("payrollBackend.Models.Employee", b =>
                 {
                     b.Navigation("Attendances");
                 });
 
-            modelBuilder.Entity("payrollBackend.Salary", b =>
+            modelBuilder.Entity("payrollBackend.Models.Salary", b =>
                 {
                     b.Navigation("Additionals");
-
-                    b.Navigation("Employee")
-                        .IsRequired();
 
                     b.Navigation("OtherDeductions");
                 });

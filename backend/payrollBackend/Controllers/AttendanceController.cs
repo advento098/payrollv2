@@ -18,9 +18,16 @@ namespace payrollBackend.Controllers
             var tableData = await _context.Attendances.Select(e => new
             {
                 attendance = e.AttendanceId,
-                firstName = e.Employee.FirstName,
+                employeeName = e.Employee.FirstName + " " + e.Employee.Surname,
+                e.DutyType,
                 day = e.AttendanceDate.Day
             }).ToListAsync();
+
+            if (tableData == null)
+            {
+                return NotFound();
+            }
+
             return Ok(tableData);
         }
 
@@ -33,8 +40,8 @@ namespace payrollBackend.Controllers
                 .Select(emp => new
                 {
                     emp.EmployeeId,
-                    EmployeeName = emp.FirstName + " " + emp.Surname,
-                    Attendances = emp.Attendances!.Select(a => new
+                    employeeName = emp.FirstName + " " + emp.Surname,
+                    attendances = emp.Attendances!.Select(a => new
                     {
                         a.AttendanceId,
                         a.AttendanceDate.Day,
@@ -43,12 +50,26 @@ namespace payrollBackend.Controllers
                     }).ToList()
                 })
                 .FirstOrDefaultAsync();
+
             if (employeeAttendances == null)
             {
                 return NotFound();
             }
 
             return Ok(employeeAttendances);
+        }
+
+        [HttpGet("count")]
+        public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendanceCount()
+        {
+            var attendance = await _context.Employees.Select(e => new
+            {
+                e.EmployeeId,
+                EmployeeName = e.FirstName + " " + e.Surname,
+                DayDutyCount = e.Attendances!.Where(e => e.DutyType == 0).Count()
+            }).ToListAsync();
+
+            return Ok(attendance);
         }
     }
 }
