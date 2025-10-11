@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using payrollBackend;
 
@@ -11,9 +12,11 @@ using payrollBackend;
 namespace payrollBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251011133510_AddedPostTable")]
+    partial class AddedPostTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,14 +69,9 @@ namespace payrollBackend.Migrations
                     b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
                     b.HasKey("AttendanceId");
 
                     b.HasIndex("EmployeeId");
-
-                    b.HasIndex("PostId");
 
                     b.ToTable("Attendances");
                 });
@@ -177,11 +175,21 @@ namespace payrollBackend.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("PostId"));
 
+                    b.Property<int?>("AttendanceId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("EmployeeId")
+                        .HasColumnType("int");
+
                     b.Property<string>("PostName")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
 
                     b.HasKey("PostId");
+
+                    b.HasIndex("AttendanceId");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Posts");
                 });
@@ -242,15 +250,7 @@ namespace payrollBackend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("payrollBackend.Models.Post", "Post")
-                        .WithMany()
-                        .HasForeignKey("PostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Employee");
-
-                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("payrollBackend.Models.Employee", b =>
@@ -273,6 +273,21 @@ namespace payrollBackend.Migrations
                         .IsRequired();
 
                     b.Navigation("Salary");
+                });
+
+            modelBuilder.Entity("payrollBackend.Models.Post", b =>
+                {
+                    b.HasOne("payrollBackend.Models.Attendance", "Attendance")
+                        .WithMany()
+                        .HasForeignKey("AttendanceId");
+
+                    b.HasOne("payrollBackend.Models.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId");
+
+                    b.Navigation("Attendance");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("payrollBackend.Models.Employee", b =>

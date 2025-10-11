@@ -16,4 +16,5 @@ public class AppDbContext : DbContext
     public DbSet<Additional> Additionals { get; set; }
     public DbSet<FixedDeduction> FixedDeductions { get; set; }
     public DbSet<OtherDeduction> OtherDeductions { get; set; }
+    public DbSet<Post> Posts { get; set; }
 }

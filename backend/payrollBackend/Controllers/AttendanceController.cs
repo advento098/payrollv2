@@ -59,6 +59,33 @@ namespace payrollBackend.Controllers
             return Ok(employeeAttendances);
         }
 
+        [HttpGet("posts/{postId}")]
+        public async Task<ActionResult> GetAttendancesOnPost(int postId)
+        {
+            var postAttendances = await _context.Attendances
+                .Where(e => e.Post.PostId == postId)
+                .GroupBy(e => e.Post.PostName)
+                .Select(g => new
+                {
+                    PostName = g.Key,
+                    Attendances = g.Select(e => new
+                    {
+                        e.AttendanceDate.Day,
+                        EmployeeName = e.Employee.FirstName + " " + e.Employee.Surname,
+                        e.DutyType,
+                        e.AttendanceStatus
+                    }).ToList()
+                })
+                .FirstOrDefaultAsync();
+
+            if (postAttendances == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(postAttendances);
+        }
+
         [HttpGet("count")]
         public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendanceCount()
         {

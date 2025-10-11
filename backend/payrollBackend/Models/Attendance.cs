@@ -12,6 +12,7 @@ public class Attendance
 
     // Navigation Properties
     public required Employee Employee { get; set; }
+    public required Post Post { get; set; }
 }
 
 public enum DutyType
