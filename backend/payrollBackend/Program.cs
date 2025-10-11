@@ -1,12 +1,14 @@
 using payrollBackend;
 using Microsoft.EntityFrameworkCore;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
+Env.Load();
 
 // Add services to the container.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(
-        builder.Configuration.GetConnectionString("DefaultConnection"),
+        Environment.GetEnvironmentVariable("DB_CONNECTION_STRING"),
         new MySqlServerVersion(new Version(8, 0, 43))
     ));
 
