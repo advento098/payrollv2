@@ -9,7 +9,7 @@ public class Attendance
     public required DutyType DutyType { get; set; }
     public AttendanceStatus AttendanceStatus { get; set; } = AttendanceStatus.Present;
     public required DateTime AttendanceDate { get; set; }
-
+    public int ColumnNumber { get; set; }
     // Navigation Properties
     public required Employee Employee { get; set; }
     public required Post Post { get; set; }

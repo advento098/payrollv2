@@ -98,5 +98,35 @@ namespace payrollBackend.Controllers
 
             return Ok(attendance);
         }
+
+
+        // [HttpPost]
+        // public async Task<ActionResult<Attendance>> UpsertAttendance(Attendance attendance)
+        // {
+        //     using var transaction = await _context.Database.BeginTransactionAsync();
+
+        //     try
+        //     {
+        //         var employeeExist = await _context.Attendances.FindAsync(attendance.EmployeeId);
+        //         if (employeeExist == null)
+        //         {
+        //             return BadRequest(new { message = "Employee does not exist." });
+        //         }
+
+        //         var existingAttendance = await _context.Attendances.Where(e => e.AttendanceDate.Date == attendance.AttendanceDate.Date && e.DutyType == attendance.DutyType).FirstOrDefaultAsync();
+
+        //         if (existingAttendance != null)
+        //         {
+        //             existingAttendance.EmployeeId = attendance.EmployeeId;
+        //             existingAttendance.DutyType = attendance.DutyType;
+        //         }
+
+        //     }
+        //     catch (Exception ex)
+        //     {
+
+        //         throw;
+        //     }
+        // }
     }
 }

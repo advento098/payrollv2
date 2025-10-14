@@ -9,4 +9,5 @@ public class Post
     [Required]
     [Column(TypeName = "varchar(50)")]
     public required string PostName { get; set; }
+    public ICollection<Attendance>? Attendances { get; set; }
 }
