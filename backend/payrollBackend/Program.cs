@@ -1,4 +1,5 @@
 using payrollBackend;
+using payrollBackend.data;
 using Microsoft.EntityFrameworkCore;
 using DotNetEnv;
 

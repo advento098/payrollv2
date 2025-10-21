@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using payrollBackend.Models;
+using payrollBackend.Models.AttendanceModels;
+using payrollBackend.data;
 
 namespace payrollBackend.Controllers
 {
@@ -12,92 +13,92 @@ namespace payrollBackend.Controllers
         private readonly AppDbContext _context = context;
 
         // Get attendances for this month
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendances()
-        {
-            var tableData = await _context.Attendances.Select(e => new
-            {
-                attendance = e.AttendanceId,
-                employeeName = e.Employee.FirstName + " " + e.Employee.Surname,
-                e.DutyType,
-                day = e.AttendanceDate.Day
-            }).ToListAsync();
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendances()
+        // {
+        //     var tableData = await _context.Attendances.Select(e => new
+        //     {
+        //         attendance = e.AttendanceId,
+        //         employeeName = e.Employee.FirstName + " " + e.Employee.Surname,
+        //         e.DutyType,
+        //         day = e.AttendanceDate.Day
+        //     }).ToListAsync();
 
-            if (tableData == null)
-            {
-                return NotFound();
-            }
+        //     if (tableData == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return Ok(tableData);
-        }
+        //     return Ok(tableData);
+        // }
 
         // GET: api/Attendance/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Attendance>> GetAttendance(int id)
-        {
-            var employeeAttendances = await _context.Employees
-                .Where(emp => emp.EmployeeId == id)
-                .Select(emp => new
-                {
-                    emp.EmployeeId,
-                    employeeName = emp.FirstName + " " + emp.Surname,
-                    attendances = emp.Attendances!.Select(a => new
-                    {
-                        a.AttendanceId,
-                        a.AttendanceDate.Day,
-                        a.DutyType,
-                        a.AttendanceStatus
-                    }).ToList()
-                })
-                .FirstOrDefaultAsync();
+        // [HttpGet("{id}")]
+        // public async Task<ActionResult<Attendance>> GetAttendance(int id)
+        // {
+        //     var employeeAttendances = await _context.Employees
+        //         .Where(emp => emp.EmployeeId == id)
+        //         .Select(emp => new
+        //         {
+        //             emp.EmployeeId,
+        //             employeeName = emp.FirstName + " " + emp.Surname,
+        //             attendances = emp.Attendances!.Select(a => new
+        //             {
+        //                 a.AttendanceId,
+        //                 a.AttendanceDate.Day,
+        //                 a.DutyType,
+        //                 a.AttendanceStatus
+        //             }).ToList()
+        //         })
+        //         .FirstOrDefaultAsync();
 
-            if (employeeAttendances == null)
-            {
-                return NotFound();
-            }
+        //     if (employeeAttendances == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return Ok(employeeAttendances);
-        }
+        //     return Ok(employeeAttendances);
+        // }
 
-        [HttpGet("posts/{postId}")]
-        public async Task<ActionResult> GetAttendancesOnPost(int postId)
-        {
-            var postAttendances = await _context.Attendances
-                .Where(e => e.Post.PostId == postId)
-                .GroupBy(e => e.Post.PostName)
-                .Select(g => new
-                {
-                    PostName = g.Key,
-                    Attendances = g.Select(e => new
-                    {
-                        e.AttendanceDate.Day,
-                        EmployeeName = e.Employee.FirstName + " " + e.Employee.Surname,
-                        e.DutyType,
-                        e.AttendanceStatus
-                    }).ToList()
-                })
-                .FirstOrDefaultAsync();
+        // [HttpGet("posts/{postId}")]
+        // public async Task<ActionResult> GetAttendancesOnPost(int postId)
+        // {
+        //     var postAttendances = await _context.Attendances
+        //         .Where(e => e.Post.PostId == postId)
+        //         .GroupBy(e => e.Post.PostName)
+        //         .Select(g => new
+        //         {
+        //             PostName = g.Key,
+        //             Attendances = g.Select(e => new
+        //             {
+        //                 e.AttendanceDate.Day,
+        //                 EmployeeName = e.Employee.FirstName + " " + e.Employee.Surname,
+        //                 e.DutyType,
+        //                 e.AttendanceStatus
+        //             }).ToList()
+        //         })
+        //         .FirstOrDefaultAsync();
 
-            if (postAttendances == null)
-            {
-                return NotFound();
-            }
+        //     if (postAttendances == null)
+        //     {
+        //         return NotFound();
+        //     }
 
-            return Ok(postAttendances);
-        }
+        //     return Ok(postAttendances);
+        // }
 
-        [HttpGet("count")]
-        public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendanceCount()
-        {
-            var attendance = await _context.Employees.Select(e => new
-            {
-                e.EmployeeId,
-                EmployeeName = e.FirstName + " " + e.Surname,
-                DayDutyCount = e.Attendances!.Where(e => e.DutyType == 0).Count()
-            }).ToListAsync();
+        // [HttpGet("count")]
+        // public async Task<ActionResult<IEnumerable<Attendance>>> GetAttendanceCount()
+        // {
+        //     var attendance = await _context.Employees.Select(e => new
+        //     {
+        //         e.EmployeeId,
+        //         EmployeeName = e.FirstName + " " + e.Surname,
+        //         DayDutyCount = e.Attendances!.Where(e => e.DutyType == 0).Count()
+        //     }).ToListAsync();
 
-            return Ok(attendance);
-        }
+        //     return Ok(attendance);
+        // }
 
 
         // [HttpPost]

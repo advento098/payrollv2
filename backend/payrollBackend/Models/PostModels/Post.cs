@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace payrollBackend.Models;
+namespace payrollBackend.Models.PostModels;
 
 public class Post
 {
@@ -9,5 +9,5 @@ public class Post
     [Required]
     [Column(TypeName = "varchar(50)")]
     public required string PostName { get; set; }
-    public ICollection<Attendance>? Attendances { get; set; }
+
 }
